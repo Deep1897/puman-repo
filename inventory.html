@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: auto;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        #container>div{
+            width:100%;
+            height: 300px;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+       
+    </style>
+</head>
+<body>
+    <button onclick="addProdect()">
+        Add More Product
+    </button>
+
+    <div id="container">
+
+
+    </div>
+</body>
+</html>
+<script>
+    var data=JSON.parse(localStorage.getItem("pumadata"))
+    console.log(data);
+    data.map(function(el){
+        var div= document.createElement("div");
+        var img=document.createElement("img");
+        img.src=el.url;
+        var type=document.createElement("h3");
+         type.innerText=el.type;
+        var description=document.createElement("h3");
+           description.innerText=el.description;
+        var price=document.createElement("h3");
+        price.innerText=el.price;
+
+        var remove=document.createElement("button");
+        remove.innerText="Remove";
+        remove.addEventListener("click",function(){
+            //event.target.parentNode.remove()
+            removeItem(el);
+        })
+
+        div.append(img,type,description,price,remove);
+        document.querySelector("#container").append(div);
+
+
+
+    })
+
+
+     function removeItem(el){
+         for(var i=0;i<data.length;i++)
+         {
+            document.querySelector("#container>div").innerHTML=null;
+
+         }
+
+        }
+
+    
+
+    function addProdect(){
+        window.location.href="index.html"
+    }
+    
+   
+</script>

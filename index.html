@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="showP()">Show Product</button>
+
+    <form id="form" >
+        <input type="text" id="type" placeholder="type">
+        <input type="text" id="description" placeholder="description">
+        <input type="text" id="price" placeholder="price">
+        <input type="text" id="url" placeholder="url">
+        <button onclick="submitfun(event)">add product</button>
+    
+    </form>
+</body>
+</html>
+<script>
+    function info(type,description,price,url)
+    {
+        this.type=type;
+        this.description=description;
+        this.price=price;
+        this.url=url;
+    }
+    function submitfun(e)
+    {
+         e.preventDefault();
+        var form=document.querySelector("#form");
+        var type=form.type.value;
+        var description=form.description.value;
+        var price=form.price.value;
+        var url=form.url.value;
+        let p=new info(type,description,price,url)
+        console.log(p)
+
+        var pumadata=JSON.parse(localStorage.getItem("pumadata"))||[];
+        pumadata.push(p);
+        localStorage.setItem("pumadata",JSON.stringify(pumadata));
+    }
+
+    function showP(){
+        window.location.href="inventory.html";
+    }
+</script>
